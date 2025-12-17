@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esimerkkisivu</title>
+    <style>
+      
+           .osio {
+            background-color: aqua;
+            border-radius: 60x;
+            border-color: black;
+            border-width: 2x;
+            border-style: solid;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            width: 400px;
+         }
+
+         #suurosio {
+          display: grid;
+          grid-template-columns:500px 500px;
+         }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        #galleriakuva {
+            height:200px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1> nettisivu</h1>
+<div id="suurosio"> 
+      <div class="osio">
+          <h3>Kuvia</h3>
+          <img id="galleriakuva" src="kuvagalleria/kaban.jpg"/><br/>
+          <button  id="edellinenNappi"onclick="vaihdaKuva(-1)">edellinen</button>
+          <button id="seuraavaNappi"onclick="vaihdaKuva(1)">seuraava</button>
+      </div>
+
+
+      <div class="osio">
+        <h2>Koodia</h2>
+        <p>Tämä on esimerkkisivu  koodauksen johdantoon.</p>
+        <button id="nappi1">nappi 1</button>
+        <button id="nappi2">nappi 2</button>
+        <p>Olet painanut nappia</p>
+        <p id= "painallukset">0</p>
+        <p>kertaa</p>
+      </div>
+
+      <div class="osio" >
+        <input id = "input1">
+        <button id="nappi3">nappi 3 </button>
+        <p id="sana1"></p>
+      </div>
+
+       <div class="osio">
+          <p>Kuinka monta kääpiötä oli lumikki sadussa?</p>
+          <input id = "input_vastaus">
+          <button id="nappi4">lahetä vastaus </button>
+          <p id="tulos"></p>
+        </div>
+
+      <div class="osio">
+        <h2>Satunnaisluvut</h2>
+        <button id="nappi5"> noppa</button>
+        <p id="luku"></p>
+
+        <button id="nappi6">heitä oikeaa noppaa</button><br/>
+        <img id="noppakuva"  src="np1.png" /><br/>
+
+        <button id="nappi7">heitä kahta noppaa</button><br/>
+        <img id="noppakuva1"  src="np1.png" />
+        <img id="noppakuva2"  src="np2.png" />
+      </div>
+
+
+  <div class="osio" >
+      <h3>Todennäköisyyslaskenta</h3>
+
+      <p>Heitetään 1000 kertaa lanttia 1000 kertaa.</p>
+
+      <button id="1000nappi">heitä lanttia</button>
+
+      <p>tulokset:</p>
+
+      <p>klaavoja enempi</p>
+
+      <p id="klaava"></p>
+
+      <p>kruunia enempi</p>
+
+      <p id="kruuna"></p>
+
+      <p>yhtä monta</p>
+
+      <p id="yhtamonta"></p>
+
+      <p>todennäöisyys saada yhtä monta</p>
+
+      <p id="todennakoisyysYhtaMonta"></p>
+     </div>
+</div>
+
+</body> 
+<script>
+    var laskuri = 0;
+    var sana ="";
+    var vastaus ="";
+    var nopat = ["np1.png", "np2.png", "np3.png", "np4.png", "np5.png", "np6.png"];
+    var galleriakuvat = ["kaban.jpg", "forest.jpg", "les.jpg"];
+    var kuvanumero = 0;
+    var galleriakansio = "kuvagalleria";
+
+
+    function vaihdaKuva(vaihdos){
+        if (kuvanumero + vaihdos >= 0 && kuvanumero + vaihdos <= galleriakuvat.length -1)
+            kuvanumero = kuvanumero + vaihdos;
+            document.getElementById("galleriakuva").src = galleriakansio + "/" + galleriakuvat[kuvanumero];
+
+         }
+
+    // JavaScript-koodi tähän
+    document.addEventListener("DOMContentLoaded", function() {
+        function varinvaihto() {
+            document.getElementsByTagName("body")[0].style.color = "red";
+        }
+        function painallus(){
+            laskuri = laskuri + 1;
+            document.getElementById("painallukset").innerHTML = laskuri;
+        }
+        function inputf(){
+            sana = document.getElementById("input1").value;
+            sana = sana.toUpperCase();
+            document.getElementById("sana1").innerHTML = sana;
+          }
+
+           function tarkistaVastaus(){
+
+            vastaus = document.getElementById("input_vastaus").value;
+
+            var tulos = "";
+
+            if (vastaus.toUpperCase() == "SEITSEMÄN"|| vastaus == "7") {
+                tulos = "Hienoa vastaisit oikein";
+            }
+            else {
+                tulos ="ei";             
+              }
+            
+            document.getElementById("tulos").innerHTML = tulos;
+          }
+
+          function satunnaisluku(){
+            var sl = Math.floor (6 * Math.random()+1);
+            document.getElementById("luku").innerHTML = sl;
+          }
+
+          function noppaheitto(){
+            var sl = Math.floor (nopat.length * Math.random());
+            document.getElementById("noppakuva").src = nopat[sl];
+          }
+
+           function noppaheitto2(){
+            var sl1 = Math.floor (nopat.length * Math.random());
+            var sl2 = Math.floor (nopat.length * Math.random());
+            document.getElementById("noppakuva1").src = nopat[sl1];
+            document.getElementById("noppakuva2").src = nopat[sl2];
+          }
+
+       
+         
+         
+        lisaaToimintoNappiin(heitä1000x1000,"1000nappi");
+        lisaaToimintoNappiin(varinvaihto, "nappi1");
+        lisaaToimintoNappiin(painallus, "nappi2");
+        lisaaToimintoNappiin(inputf, "nappi3");
+        lisaaToimintoNappiin(tarkistaVastaus, "nappi4");
+        lisaaToimintoNappiin(satunnaisluku, "nappi5");
+        lisaaToimintoNappiin(noppaheitto, "nappi6");
+        lisaaToimintoNappiin(noppaheitto2, "nappi7");
+         
+          function heitä1000x1000() {
+            var kruuniaEnempi = 0;
+            var klaavojaEnempi = 0;
+            var yhtapaljon = 0; 
+
+            for(var j=0; j<1000; j++){ 
+            var klaava = 0;
+            var kruuna = 0;
+
+            for(var i=0; i<1000; i++) {
+              let sl = Math.floor(Math.random() * 2);
+              if(sl == 0) {
+                klaava++;
+              } else {
+                kruuna++;
+              }
+
+              if(klaava > kruuna){klaavojaEnempi++;
+              } else if (kruuna > klaava){
+                kruuniaEnempi++;
+              } else {
+                yhtapaljon++;
+              }
+            }
+
+          document.getElementById("klaava").innerHTML = klaavojaEnempi;
+
+            document.getElementById("kruuna").innerHTML = kruuniaEnempi;
+
+            document.getElementById("yhtamonta").innerHTML = yhtapaljon;
+
+            document.getElementById("todennakoisyysYhtaMonta").innerHTML = yhtapaljon / 1000000 * 100 + "%";
+          }
+        }
+          
+        function lisaaToimintoNappiin(toiminto, nappi){
+            var n = document.getElementById(nappi);
+            n.addEventListener("click", toiminto);
+        }
+    });
+</script>
+</html>
